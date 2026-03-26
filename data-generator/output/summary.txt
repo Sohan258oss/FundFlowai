@@ -1,0 +1,33 @@
+============================================================
+FUND FLOW SYNTHETIC DATA — GENERATION SUMMARY
+Generated: 2026-03-21T15:48:23.968586
+============================================================
+
+Total accounts:           10,000
+Total transactions:    1,320,177
+Normal transactions:   1,317,869
+Suspicious txns:           2,308
+Suspicious ratio:         0.175%
+
+PATTERN BREAKDOWN:
+----------------------------------------
+  DORMANT_ACTIVATION           80 patterns
+  LAYERING                    100 patterns
+  PROFILE_MISMATCH            120 patterns
+  ROUND_TRIPPING               80 patterns
+  STRUCTURING                 120 patterns
+
+ACCOUNT STATUS DISTRIBUTION:
+----------------------------------------
+  ACTIVE                     9369
+  CLOSED                       96
+  DORMANT                     535
+
+ACCOUNT TYPE DISTRIBUTION:
+----------------------------------------
+  CURRENT                    2052
+  FD                          307
+  LOAN                        942
+  SALARY                     1996
+  SAVINGS                    3976
+  WALLET                      727

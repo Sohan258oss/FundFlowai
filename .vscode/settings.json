@@ -1,0 +1,13 @@
+{
+    "python.analysis.extraPaths": [
+        "./data-generator",
+        "./graph-engine",
+        "./detection-models"
+    ],
+    "python.autoComplete.extraPaths": [
+        "./data-generator",
+        "./graph-engine",
+        "./detection-models"
+    ],
+    "python.defaultInterpreterPath": "C:/Users/Sohan/alpha/.venv/Scripts/python.exe"
+}

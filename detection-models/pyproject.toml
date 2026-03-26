@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "detection-models"
+version = "0.1.0"
+description = "Phase 2: ML Detection Models for Fund Flow Tracking"
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.0.0",
+    "torch_geometric>=2.3.0",
+    "scikit-learn>=1.2.0",
+    "xgboost>=2.0.0",
+    "lightgbm>=4.0.0",
+    "pandas>=2.0.0",
+    "numpy>=1.24.0",
+    "networkx>=3.0",
+    "neo4j>=5.9.0",
+    "shap>=0.42.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0"
+]

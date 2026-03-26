@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fundflow-graph-engine"
+version = "0.1.0"
+description = "Graph construction engine — loads transactions into Neo4j and provides query utilities"
+requires-python = ">=3.10"
+dependencies = [
+    "neo4j>=5.15",
+    "pandas>=2.1",
+    "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

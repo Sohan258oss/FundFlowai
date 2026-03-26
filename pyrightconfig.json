@@ -1,0 +1,7 @@
+{
+    "extraPaths": [
+        "data-generator",
+        "graph-engine",
+        "detection-models"
+    ]
+}

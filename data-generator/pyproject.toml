@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fundflow-data-generator"
+version = "0.1.0"
+description = "Synthetic banking transaction generator with embedded suspicious patterns"
+requires-python = ">=3.10"
+dependencies = [
+    "faker>=22.0",
+    "numpy>=1.26",
+    "pandas>=2.1",
+    "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+]
+
+[project.scripts]
+generate = "data_generator.generator:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
