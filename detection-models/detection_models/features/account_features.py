@@ -67,7 +67,7 @@ class AccountFeatureExtractor:
         
         # Keep features useful for ML
         # categorical encoding can be done downstream or here
-        cols = ["account_type", "annual_income", "average_monthly_balance", "status"]
+        cols = ["account_type", "annual_income", "avg_balance_30d", "status"]
         return df[[c for c in cols if c in df.columns]]
 
     def get_all_features(self) -> pd.DataFrame:

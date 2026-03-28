@@ -1,0 +1,84 @@
+{
+  "records": [
+    {
+      "cluster_id": "CLU-DEMO-001",
+      "investigator_id": "INV-001",
+      "disposition": "TRUE_POSITIVE",
+      "reason_code": null,
+      "feature_vector": {
+        "risk_score": 87,
+        "layering_gnn": 0.87
+      },
+      "notes": null,
+      "label": "TP",
+      "timestamp": "2026-03-28T15:40:11.089124",
+      "used_in_training": false
+    },
+    {
+      "cluster_id": "CLU-DEMO-002",
+      "investigator_id": "INV-001",
+      "disposition": "FALSE_POSITIVE",
+      "reason_code": "NORMAL_BUSINESS",
+      "feature_vector": {
+        "risk_score": 35,
+        "layering_gnn": 0.12
+      },
+      "notes": null,
+      "label": "FP_SOFT",
+      "timestamp": "2026-03-28T15:40:11.100744",
+      "used_in_training": false
+    },
+    {
+      "cluster_id": "CLU-DEMO-003",
+      "investigator_id": "INV-002",
+      "disposition": "ESCALATED",
+      "reason_code": null,
+      "feature_vector": {},
+      "notes": null,
+      "label": "PENDING",
+      "timestamp": "2026-03-28T15:40:11.112196",
+      "used_in_training": false
+    },
+    {
+      "cluster_id": "CLU-DEMO-001",
+      "investigator_id": "INV-001",
+      "disposition": "TRUE_POSITIVE",
+      "reason_code": null,
+      "feature_vector": {
+        "risk_score": 87,
+        "layering_gnn": 0.87
+      },
+      "notes": null,
+      "label": "TP",
+      "timestamp": "2026-03-28T17:36:35.900771",
+      "used_in_training": false
+    },
+    {
+      "cluster_id": "CLU-DEMO-002",
+      "investigator_id": "INV-001",
+      "disposition": "FALSE_POSITIVE",
+      "reason_code": "NORMAL_BUSINESS",
+      "feature_vector": {
+        "risk_score": 35,
+        "layering_gnn": 0.12
+      },
+      "notes": null,
+      "label": "FP_SOFT",
+      "timestamp": "2026-03-28T17:36:35.913245",
+      "used_in_training": false
+    },
+    {
+      "cluster_id": "CLU-DEMO-003",
+      "investigator_id": "INV-002",
+      "disposition": "ESCALATED",
+      "reason_code": null,
+      "feature_vector": {},
+      "notes": null,
+      "label": "PENDING",
+      "timestamp": "2026-03-28T17:36:35.923578",
+      "used_in_training": false
+    }
+  ],
+  "tp_since_last_retrain": 2,
+  "baseline_features": null
+}

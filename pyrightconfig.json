@@ -2,6 +2,8 @@
     "extraPaths": [
         "data-generator",
         "graph-engine",
-        "detection-models"
+        "detection-models",
+        "risk-scoring",
+        "feedback"
     ]
 }

@@ -23,6 +23,9 @@ dev = [
 [project.scripts]
 generate = "data_generator.generator:main"
 
+[tool.setuptools.packages.find]
+include = ["data_generator*"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
