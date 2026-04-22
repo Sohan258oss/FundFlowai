@@ -20,6 +20,14 @@ const levelBg: Record<string, string> = {
   LOW: "#f0fdf4",
 };
 
+const patternLabels: Record<string, string> = {
+  LAYERING: "Layering",
+  ROUND_TRIP: "Round-Trip",
+  STRUCTURING: "Structuring",
+  DORMANT_ACTIVATION: "Dormant",
+  PROFILE_MISMATCH: "Profile",
+};
+
 export default function AlertsList({ alerts, selectedId, onSelect }: Props) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
@@ -54,6 +62,12 @@ export default function AlertsList({ alerts, selectedId, onSelect }: Props) {
               {alert.risk_level}
             </span>
           </div>
+          {alert.pattern_type && (
+            <div style={{ fontSize: 11, color: "#6b7280", marginTop: 4 }}>
+              {patternLabels[alert.pattern_type] || alert.pattern_type}
+              {alert.account_id && <span style={{ marginLeft: 6, fontFamily: "monospace", fontSize: 10 }}>{alert.account_id.slice(-8)}</span>}
+            </div>
+          )}
           <div style={{ display: "flex", justifyContent: "space-between", marginTop: 6, alignItems: "center" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
               <div

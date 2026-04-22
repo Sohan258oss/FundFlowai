@@ -11,7 +11,7 @@ Handles:
 
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
 from pathlib import Path
 
@@ -39,7 +39,9 @@ FP_REASON_CODES = {
 RETRAIN_TP_THRESHOLD = 50
 PSI_ALERT_THRESHOLD  = 0.25
 
-STORAGE_PATH = Path(os.environ.get("FEEDBACK_STORAGE", "./feedback_store.json"))
+# Resolve storage path relative to this module, not CWD, to avoid path mismatches
+_default_store = Path(__file__).resolve().parent.parent / "feedback_store.json"
+STORAGE_PATH = Path(os.environ.get("FEEDBACK_STORAGE", str(_default_store)))
 
 
 # ─── Persistence helpers ──────────────────────────────────────────────────────
@@ -125,7 +127,7 @@ class DispositionRecorder:
             "feature_vector":   feature_vector or {},
             "notes":            notes,
             "label":            label,
-            "timestamp":        datetime.utcnow().isoformat(),
+            "timestamp":        datetime.now(timezone.utc).isoformat(),
             "used_in_training": False,
         }
 
@@ -332,6 +334,6 @@ class PSIMonitor:
             "feature_psi":     results,
             "drift_detected":  drift_detected,
             "alert_threshold": PSI_ALERT_THRESHOLD,
-            "checked_at":      datetime.utcnow().isoformat(),
+            "checked_at":      datetime.now(timezone.utc).isoformat(),
             "recommendation":  "Force model review" if drift_detected else "No action required",
         }

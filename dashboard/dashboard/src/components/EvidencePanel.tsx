@@ -76,7 +76,7 @@ export default function EvidencePanel({ alert, onFileSTR, onClear }: Props) {
       </div>
 
       {/* Context Flags */}
-      {Object.keys(alert.context_flags).length > 0 && (
+      {Object.values(alert.context_flags).some(Boolean) && (
         <div style={{ background: "#fef3c7", borderRadius: 8, padding: 12, border: "1px solid #fcd34d" }}>
           <div style={{ fontSize: 12, fontWeight: 700, color: "#92400e", marginBottom: 6 }}>
             ⚠️ CONTEXT AMPLIFIERS
@@ -131,6 +131,7 @@ export default function EvidencePanel({ alert, onFileSTR, onClear }: Props) {
             a.href = url;
             a.download = `evidence_${alert.cluster_id}.txt`;
             a.click();
+            URL.revokeObjectURL(url);
           }}
           style={{
             padding: "10px",

@@ -2,12 +2,18 @@
 
 export interface Alert {
   cluster_id: string;
+  pattern_type?: string;
+  account_id?: string;
   risk_score: number;
   risk_level: "LOW" | "MEDIUM" | "HIGH" | "CRITICAL";
   created_at: string;
   model_probs: ModelProbs;
   context_flags: ContextFlags;
   evidence_narrative: string[];
+  raw?: {
+    total_amount?: number;
+    transaction_ids?: string[];
+  };
 }
 
 export interface ModelProbs {

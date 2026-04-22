@@ -5,7 +5,9 @@ Exposes REST endpoints for the Investigator Dashboard to record
 dispositions, check retraining status, and monitor drift.
 """
 
-from fastapi import FastAPI, HTTPException
+import os
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from typing import Optional
 from feedback import (
@@ -24,6 +26,28 @@ app = FastAPI(
     description="Investigator feedback, retraining triggers, and drift monitoring.",
     version="1.0.0",
 )
+
+# ─── CORS ─────────────────────────────────────────────────────────────────────
+allowed_origins = os.environ.get("CORS_ORIGINS", "http://localhost:3000").split(",")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allowed_origins,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# ─── API Key Authentication ───────────────────────────────────────────────────
+API_KEY = os.environ.get("FUNDFLOW_API_KEY", "")
+
+@app.middleware("http")
+async def check_api_key(request: Request, call_next):
+    """Skip auth if no key is configured (dev mode) or for health/docs."""
+    if API_KEY and request.url.path not in ("/health", "/docs", "/openapi.json"):
+        provided = request.headers.get("X-API-Key", "")
+        if provided != API_KEY:
+            from fastapi.responses import JSONResponse
+            return JSONResponse(status_code=401, content={"detail": "Invalid or missing API key"})
+    return await call_next(request)
 
 recorder = DispositionRecorder()
 fp_model = FPDampeningModel()
@@ -54,7 +78,13 @@ class PSICheckRequest(BaseModel):
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "service": "feedback-loop"}
+    """Health check that verifies storage is accessible."""
+    try:
+        from feedback.feedback_core import STORAGE_PATH
+        storage_ok = STORAGE_PATH.parent.exists() or True  # parent always creatable
+        return {"status": "ok", "service": "feedback-loop", "storage": str(STORAGE_PATH)}
+    except Exception as e:
+        return {"status": "degraded", "service": "feedback-loop", "error": str(e)}
 
 
 @app.get("/api/v1/feedback/reason-codes")

@@ -18,6 +18,15 @@ def get_driver(
     return GraphDatabase.driver(uri, auth=(user, password))
 
 
+def _validate_int(value: int, name: str, min_val: int = 1, max_val: int = 20) -> int:
+    """Validate and sanitize integer parameters before Cypher concatenation."""
+    if not isinstance(value, int):
+        raise ValueError(f"{name} must be an integer, got {type(value).__name__}")
+    if value < min_val or value > max_val:
+        raise ValueError(f"{name} must be between {min_val} and {max_val}, got {value}")
+    return value
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Fund Flow Tracing
 # ─────────────────────────────────────────────────────────────────────────────
@@ -45,6 +54,8 @@ def find_multi_hop_paths(
     Returns:
         List of path dictionaries.
     """
+    _validate_int(min_hops, "min_hops", 1, 10)
+    _validate_int(max_hops, "max_hops", 1, 10)
     query = """
     MATCH path = (source:Account {account_id: $source_id})
                   -[:TRANSFERRED_TO*""" + str(min_hops) + """..""" + str(max_hops) + """]->(dest:Account)
@@ -85,6 +96,7 @@ def find_shortest_path(
     Returns:
         List of path dictionaries.
     """
+    _validate_int(max_hops, "max_hops", 1, 15)
     query = """
     MATCH path = shortestPath(
         (source:Account {account_id: $source_id})
@@ -121,6 +133,8 @@ def detect_cycles(
 
     Returns cycles where the same account appears at start and end.
     """
+    _validate_int(min_length, "min_length", 2, 10)
+    _validate_int(max_length, "max_length", 2, 10)
     query = """
     MATCH path = (start:Account)-[:TRANSFERRED_TO*""" + str(min_length) + """..""" + str(max_length) + """]->(start)
     WHERE ALL(r IN relationships(path) WHERE r.amount >= $min_amount)
@@ -237,6 +251,7 @@ def get_account_neighborhood(
 
     Returns nodes and edges for visualization.
     """
+    _validate_int(depth, "depth", 1, 5)
     query = """
     MATCH path = (center:Account {account_id: $account_id})
                   -[:TRANSFERRED_TO*1..""" + str(depth) + """]-(neighbor)

@@ -51,7 +51,7 @@ class LayeringGNNDetector:
         
         # 3. Create Node Feature Tensor (X)
         feature_cols = [
-            "annual_income", "average_monthly_balance", "max_daily_outflow", 
+            "annual_income", "avg_balance_30d", "max_daily_outflow", 
             "outflow_std_dev", "in_degree", "out_degree", "total_inflow", 
             "total_outflow", "fan_out_ratio"
         ]
